@@ -11,6 +11,10 @@
 # Library Class section - list of all Library Classes needed by this Platform.
 #
 ################################################################################
+[Defines]
+  # To enable DMC-620 MM driver, set this to TRUE.
+  DEFINE ENABLE_DMC620_MM                = FALSE
+
 [LibraryClasses]
   #
   # Basic
@@ -94,6 +98,25 @@
   gEfiSecurityPkgTokenSpaceGuid.PcdUserPhysicalPresence|TRUE
 !endif
 
+!if $(ENABLE_GHES_MM) == TRUE
+  ## GHESv2 Generic Error Memory Space
+  gArmPlatformTokenSpaceGuid.PcdGhesGenericErrorDataMmBufferBase|0xFF610000
+  gArmPlatformTokenSpaceGuid.PcdGhesGenericErrorDataMmBufferSize|0x20000
+!endif
+
+!if $(ENABLE_DMC620_MM) == TRUE
+  ## DMC620
+  gDmc620MmTokenSpaceGuid.PcdDmc620NumCtrl|2
+  gDmc620MmTokenSpaceGuid.PcdDmc620RegisterBase|0x4E000000
+  gDmc620MmTokenSpaceGuid.PcdDmc620CtrlSize|0x100000
+  gDmc620MmTokenSpaceGuid.PcdDmc620CorrectableErrorThreshold|10
+  gDmc620MmTokenSpaceGuid.PcdDmc620ErrSourceCount|1
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramErrorSdeiEventBase|804
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramOneBitErrorDataBase|0xFF610000
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramOneBitErrorDataSize|0x100
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramOneBitErrorSourceId|0
+!endif
+
 ###################################################################################################
 #
 # Components Section - list of the modules and components that will be processed by compilation
@@ -132,6 +155,13 @@
       VariablePolicyLib|MdeModulePkg/Library/VariablePolicyLib/VariablePolicyLib.inf
       VariablePolicyHelperLib|MdeModulePkg/Library/VariablePolicyHelperLib/VariablePolicyHelperLib.inf
   }
+!endif
+
+!if $(ENABLE_GHES_MM) == TRUE
+  ArmPlatformPkg/Drivers/HestMmErrorSources/HestErrorSourceStandaloneMm.inf
+!endif
+!if $(ENABLE_DMC620_MM) == TRUE
+  Platform/ARM/Drivers/Dmc620Mm/Dmc620Mm.inf
 !endif
 
 ###################################################################################################

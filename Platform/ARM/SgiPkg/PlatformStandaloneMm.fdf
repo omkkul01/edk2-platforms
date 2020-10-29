@@ -48,6 +48,12 @@ READ_STATUS        = TRUE
 READ_LOCK_CAP      = TRUE
 READ_LOCK_STATUS   = TRUE
 
+!if $(ENABLE_GHES_MM) == TRUE
+  INF ArmPlatformPkg/Drivers/HestMmErrorSources/HestErrorSourceStandaloneMm.inf
+!endif
+!if $(ENABLE_DMC620_MM) == TRUE
+  INF Platform/ARM/Drivers/Dmc620Mm/Dmc620Mm.inf
+!endif
   INF StandaloneMmPkg/Core/StandaloneMmCore.inf
 !if $(SECURE_STORAGE_ENABLE) == TRUE
   INF ArmPlatformPkg/Drivers/NorFlashDxe/NorFlashStandaloneMm.inf
