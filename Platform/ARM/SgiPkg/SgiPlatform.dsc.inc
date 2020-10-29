@@ -107,6 +107,10 @@
   gArmSgiTokenSpaceGuid.PcdVirtioNetSupported|TRUE
   gEfiMdeModulePkgTokenSpaceGuid.PcdEnableVariableRuntimeCache|FALSE
 
+!if $(ENABLE_GHES_MM) == TRUE
+  gArmSgiTokenSpaceGuid.PcdGhesMmSupported|TRUE
+!endif
+
 [PcdsFixedAtBuild.common]
   gArmTokenSpaceGuid.PcdVFPEnabled|1
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxVariableSize|0x2000

@@ -1,6 +1,6 @@
 /** @file
 *
-*  Copyright (c) 2018-2020, ARM Limited. All rights reserved.
+*  Copyright (c) 2018-2021, ARM Limited. All rights reserved.
 *
 *  SPDX-License-Identifier: BSD-2-Clause-Patent
 *
@@ -17,7 +17,8 @@
 
 // Total number of descriptors, including the final "end-of-table" descriptor.
 #define MAX_VIRTUAL_MEMORY_MAP_DESCRIPTORS                 \
-          (14 + (FixedPcdGet32 (PcdChipCount) * 2))
+          (14 + (FixedPcdGet32 (PcdChipCount) * 2)) +      \
+          (FeaturePcdGet (PcdGhesMmSupported))
 
 /**
   Returns the Virtual Memory Map of the platform.
@@ -238,6 +239,14 @@ ArmPlatformGetVirtualMemoryMap (
   VirtualMemoryTable[Index].VirtualBase     = PcdGet64 (PcdMmBufferBase);
   VirtualMemoryTable[Index].Length          = PcdGet64 (PcdMmBufferSize);
   VirtualMemoryTable[Index].Attributes      = ARM_MEMORY_REGION_ATTRIBUTE_UNCACHED_UNBUFFERED;
+
+  if (FeaturePcdGet (PcdGhesMmSupported)) {
+    // GHESv2 Generic Error Memory Space
+    VirtualMemoryTable[++Index].PhysicalBase  = PcdGet64 (PcdGhesGenericErrorDataMmBufferBase);
+    VirtualMemoryTable[Index].VirtualBase     = PcdGet64 (PcdGhesGenericErrorDataMmBufferBase);
+    VirtualMemoryTable[Index].Length          = PcdGet64 (PcdGhesGenericErrorDataMmBufferSize);
+    VirtualMemoryTable[Index].Attributes      = ARM_MEMORY_REGION_ATTRIBUTE_DEVICE;
+  }
 
   // End of Table
   VirtualMemoryTable[++Index].PhysicalBase  = 0;
