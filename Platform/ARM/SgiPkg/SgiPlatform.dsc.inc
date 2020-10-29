@@ -21,6 +21,9 @@
   DEFINE LPI_EN                             = FALSE
   DEFINE CPPC_EN                            = FALSE
 
+  # To allow firmware first error handling, set this to TRUE.
+  DEFINE ENABLE_GHES_MM                     = FALSE
+
 [BuildOptions]
   *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES
 
@@ -208,6 +211,12 @@
   gArmTokenSpaceGuid.PcdMmBufferBase|0xFF600000
   gArmTokenSpaceGuid.PcdMmBufferSize|0x10000
 
+!if $(ENABLE_GHES_MM) == TRUE
+  ## GHESv2 Generic Error memory space
+  gArmPlatformTokenSpaceGuid.PcdGhesGenericErrorDataMmBufferBase|0xFF610000
+  gArmPlatformTokenSpaceGuid.PcdGhesGenericErrorDataMmBufferSize|0x20000
+!endif
+
 ################################################################################
 #
 # Components Section - list of all EDK II Modules needed by this Platform
@@ -364,4 +373,12 @@
   }
 !else
   ArmPkg/Drivers/MmCommunicationDxe/MmCommunication.inf
+!endif
+
+  #
+  # GHESv2 HEST error sources support
+  #
+  ArmPlatformPkg/Drivers/Apei/HestDxe/HestDxe.inf
+!if $(ENABLE_GHES_MM) == TRUE
+  ArmPlatformPkg/Drivers/HestMmErrorSources/HestErrorSourceDxe.inf
 !endif
