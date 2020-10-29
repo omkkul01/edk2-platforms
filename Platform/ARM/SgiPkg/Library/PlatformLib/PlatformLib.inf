@@ -79,9 +79,15 @@
   gArmSgiTokenSpaceGuid.PcdWdogBase
   gArmSgiTokenSpaceGuid.PcdWdogSize
 
+  gArmPlatformTokenSpaceGuid.PcdGhesGenericErrorDataMmBufferBase
+  gArmPlatformTokenSpaceGuid.PcdGhesGenericErrorDataMmBufferSize
+
   gEfiMdePkgTokenSpaceGuid.PcdPciExpressBaseAddress
   gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase64
   gEfiMdeModulePkgTokenSpaceGuid.PcdSerialRegisterBase
+
+[FeaturePcd]
+  gArmSgiTokenSpaceGuid.PcdGhesMmSupported
 
 [Guids]
   gArmSgiPlatformIdDescriptorGuid
