@@ -1,0 +1,60 @@
+## @file
+#  StandaloneMM driver for the DMC620 Memory Controller.
+#
+#  Driver to handle 1-bit Corrected DRAM errors for DMC(s).
+#
+#  Copyright (c) 2020, ARM Limited. All rights reserved.
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x0001001A
+  BASE_NAME                      = StandaloneMmDmc620Driver
+  FILE_GUID                      = CB53ACD9-A1A1-43B3-A638-AC74DA5D9DA2
+  MODULE_TYPE                    = MM_STANDALONE
+  VERSION_STRING                 = 1.0
+  PI_SPECIFICATION_VERSION       = 0x00010032
+  ENTRY_POINT                    = Dmc620MmDriverInitialize
+
+[Sources]
+  Dmc620Mm.c
+  Dmc620MmErrorSourceInfo.c
+
+[Packages]
+  ArmPkg/ArmPkg.dec
+  ArmPlatformPkg/ArmPlatformPkg.dec
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  Platform/ARM/Drivers/Dmc620Mm/Dmc620Mm.dec
+  StandaloneMmPkg/StandaloneMmPkg.dec
+
+[LibraryClasses]
+  StandaloneMmDriverEntryPoint
+  DebugLib
+  ArmSvcLib
+  ArmLib
+  BaseMemoryLib
+
+[Protocols]
+  gMmHestErrorSourceDescProtocolGuid      ##PRODUCES
+
+[FixedPcd]
+  gArmPlatformTokenSpaceGuid.PcdGhesGenericErrorDataMmBufferBase
+  gArmPlatformTokenSpaceGuid.PcdGhesGenericErrorDataMmBufferSize
+
+  gDmc620MmTokenSpaceGuid.PcdDmc620CorrectableErrorThreshold
+  gDmc620MmTokenSpaceGuid.PcdDmc620CtrlSize
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramErrorSdeiEventBase
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramOneBitErrorDataBase
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramOneBitErrorDataSize
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramOneBitErrorSourceId
+  gDmc620MmTokenSpaceGuid.PcdDmc620ErrSourceCount
+  gDmc620MmTokenSpaceGuid.PcdDmc620NumCtrl
+  gDmc620MmTokenSpaceGuid.PcdDmc620RegisterBase
+
+[Guids]
+  gArmDmcEventHandlerGuid
+
+[Depex]
+  TRUE

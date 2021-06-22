@@ -1,0 +1,30 @@
+## @file
+#  DMC-620 MM driver specific declrations.
+#
+#  This file defines GUIDs and declares PCD values for DMC-620 MM driver.
+#
+#  Copyright (c) 2020 - 2021, ARM Limited. All rights reserved.
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  DEC_SPECIFICATION              = 0x0001001A
+  PACKAGE_NAME                   = Dmc620Mm
+  PACKAGE_GUID                   = 94110B10-8E72-42A0-8963-D2B57FCF0F38
+  PACKAGE_VERSION                = 0.1
+
+[Guids]
+  gDmc620MmTokenSpaceGuid = {0xc305f72a, 0xd10d, 0x45e8, { 0x81, 0x78, 0x51, 0x8b, 0x78, 0x62, 0x77, 0x79 } }
+  gArmDmcEventHandlerGuid = { 0x5ef0afd5, 0xe01a, 0x4c30, { 0x86, 0x19, 0x45, 0x46, 0x26, 0x91, 0x80, 0x98 }}
+
+[PcdsFixedAtBuild.common]
+  gDmc620MmTokenSpaceGuid.PcdDmc620NumCtrl|2|UINT32|0x00000001
+  gDmc620MmTokenSpaceGuid.PcdDmc620RegisterBase|0x4E000000|UINT64|0x00000002
+  gDmc620MmTokenSpaceGuid.PcdDmc620CtrlSize|0x100000|UINT32|0x00000003
+  gDmc620MmTokenSpaceGuid.PcdDmc620CorrectableErrorThreshold|10|UINT32|0x00000004
+  gDmc620MmTokenSpaceGuid.PcdDmc620ErrSourceCount|1|UINT32|0x00000005
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramErrorSdeiEventBase|0|UINT32|0x00000006
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramOneBitErrorDataBase|0|UINT64|0x00000007
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramOneBitErrorDataSize|0|UINT64|0x00000008
+  gDmc620MmTokenSpaceGuid.PcdDmc620DramOneBitErrorSourceId|0|UINT16|0x00000009
