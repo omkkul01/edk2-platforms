@@ -221,6 +221,13 @@
   gArmPlatformTokenSpaceGuid.PcdGhesGenericErrorDataMmBufferSize|0x20000
 !endif
 
+  # ACPI Table Header IDs
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemId|"ARMLTD"
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemTableId|0x4152464e49464552 # REFINFRA
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultOemRevision|0x20200831
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorId|0x204d5241 # ARM
+  gEfiMdeModulePkgTokenSpaceGuid.PcdAcpiDefaultCreatorRevision|1
+
 ################################################################################
 #
 # Components Section - list of all EDK II Modules needed by this Platform
