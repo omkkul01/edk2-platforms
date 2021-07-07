@@ -191,6 +191,13 @@ READ_LOCK_STATUS   = TRUE
   INF Platform/ARM/SgiPkg/Drivers/PlatformDxe/PlatformDxe.inf
 
   #
+  # platform error handler driver
+  #
+!if $(ENABLE_FIRMWARE_FIRST) == TRUE
+  INF Platform/ARM/SgiPkg/Drivers/PlatformErrorHandlerDxe/PlatformErrorHandlerDxe.inf
+!endif
+
+  #
   # Bds
   #
   INF MdeModulePkg/Application/UiApp/UiApp.inf

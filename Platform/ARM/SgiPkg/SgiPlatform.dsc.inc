@@ -24,6 +24,9 @@
   # To allow firmware first error handling, set this to TRUE.
   DEFINE ENABLE_GHES_MM                     = FALSE
 
+  # To allow firmware first error handling, set this to TRUE.
+  DEFINE ENABLE_FIRWARE_FIRST               = FALSE
+
 [BuildOptions]
   *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES
 
@@ -325,6 +328,13 @@
   # platform driver
   #
   Platform/ARM/SgiPkg/Drivers/PlatformDxe/PlatformDxe.inf
+
+  #
+  # platform error handler driver
+  #
+!if $(ENABLE_FIRMWARE_FIRST) == TRUE
+  Platform/ARM/SgiPkg/Drivers/PlatformErrorHandlerDxe/PlatformErrorHandlerDxe.inf
+!endif
 
   #
   # FAT filesystem + GPT/MBR partitioning
